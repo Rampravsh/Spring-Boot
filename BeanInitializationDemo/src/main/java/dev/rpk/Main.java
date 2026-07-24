@@ -9,6 +9,10 @@ public class Main {
     static void main() {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
+        OrderService order = context.getBean(OrderService.class);
+        System.out.println("payment Service not started yet");
+        order.placeOrder();
+//        PaymentService payment = context.getBean(PaymentService.class);
 
     }
 }
