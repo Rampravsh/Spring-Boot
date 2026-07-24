@@ -1,5 +1,6 @@
 package dev.rpk;
 
+import dev.rpk.notification.NotificationService;
 import dev.rpk.payment.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,11 +11,15 @@ public class OrderService {
 
 //    @Autowired
     private final PaymentService paymentService;
+    private final NotificationService notificationService;
+
 
     @Autowired
-    public OrderService(@Qualifier("cardPayment") PaymentService paymentService){
+    public OrderService(@Qualifier("up") PaymentService paymentService, @Qualifier("popup") NotificationService notificationService){
         this.paymentService=paymentService;
+        this.notificationService = notificationService;
     }
+
 
 //    @Autowired
 //    public void setPaymentService(PaymentService paymentService) {
@@ -24,6 +29,7 @@ public class OrderService {
     public void placeOrder(){
         paymentService.pay();
         System.out.println("order is placed");
+        notificationService.sendNotification();
     }
 
 }
